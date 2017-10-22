@@ -1,0 +1,17 @@
+{
+  "name": "ts-config",
+  "version": "0.0.1",
+  "description": "tsconfig.json file for Typescript development.",
+  "main": "index.js",
+  "scripts": {
+    "postinstall":"node index.js"
+  },
+  "keywords": [
+    "dev",
+    "tools",
+    "typescript",
+    "config"
+  ],
+  "author": "Michael Price",
+  "license": "ISC"
+}
