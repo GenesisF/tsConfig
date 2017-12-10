@@ -38,5 +38,5 @@ Promise.all([READ_PKG_UP(), FS.readJson(PATH.normalize(`${__dirname}${SEP}${TS_C
 			SAFE_REPLACE.writeFileAsync(result.path, new Buffer(JSON.stringify(result.pkg, null, 2)))
 		]);
 	})
-	.then(()=> console.log(`"tsconfig" init complete.`));
+	.then(()=> console.log(`"tsconfig" init complete.`))
 	.catch(console.error);
