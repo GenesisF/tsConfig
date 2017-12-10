@@ -1,6 +1,6 @@
 {
   "name": "ts-config",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "tsconfig.json file for Typescript development.",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,6 @@
   "dependencies": {
     "fs-extra": "^4.0.3",
     "lodash.merge": "^4.6.0",
-    "read-pkg-up": "^3.0.0",
-    "safe-replace": "git+ssh://git@github.com/raptor9g/node-safe-replace.git#v1.0.3"
+    "read-pkg-up": "^3.0.0"
   }
 }
