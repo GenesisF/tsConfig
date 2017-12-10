@@ -11,7 +11,7 @@ const TS_CONIFG_FILE_NAME = 'tsconfig.json'
 Promise.all([READ_PKG_UP(), FS.readJson(PATH.normalize(`${__dirname}${SEP}${TS_CONIFG_FILE_NAME}`))])
 	.then((results) => {
 		
-		let result = result[0];
+		let result = results[0];
 
 		result.tsconfig = result[1];
 		result.tsconfigPath = PATH.normalize(`${PATH.parse(result.path).dir}${SEP}${TS_CONIFG_FILE_NAME}`);
