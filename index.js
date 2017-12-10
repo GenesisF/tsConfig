@@ -5,15 +5,16 @@ const FS = require('fs-extra');
 const MERGE = require('lodash.merge');
 
 const SEP = PATH.sep;
-const TS_CONIFG_FILE_NAME = 'tsconfig.json'
+const TS_CONIFG_FILE_NAME = 'tsconfig.json';
 
 //Get package.json and tsconfig.json
-Promise.all([READ_PKG_UP(), FS.readJson(PATH.normalize(`${__dirname}${SEP}${TS_CONIFG_FILE_NAME}`))])
+(new Promise((resolve)=>setTimeout(resolve,1000)))
+	.then(()=>Promise.all([READ_PKG_UP({cwd:PATH.normalize(`${__dirname}/..`)}), FS.readJson(PATH.normalize(`${__dirname}${SEP}${TS_CONIFG_FILE_NAME}`))]))
 	.then((results) => {
-		
-		let result = results[0];
 
-		result.tsconfig = result[1];
+		let result = results[0];
+		console.log(result.pkg);
+		result.tsconfig = results[1];
 		result.tsconfigPath = PATH.normalize(`${PATH.parse(result.path).dir}${SEP}${TS_CONIFG_FILE_NAME}`);
 
 		//Add typescript build command to package npm scripts
@@ -33,9 +34,10 @@ Promise.all([READ_PKG_UP(), FS.readJson(PATH.normalize(`${__dirname}${SEP}${TS_C
 	})
 	//Write changes to package and tsconfig
 	.then((result)=>{
+
 		return Promise.all([
-			SAFE_REPLACE.writeFileAsync(result.tsconfigPath, new Buffer(JSON.stringify(result.tsconfig, null, 2))),
-			SAFE_REPLACE.writeFileAsync(result.path, new Buffer(JSON.stringify(result.pkg, null, 2)))
+			SAFE_REPLACE.writeFileAsync(result.tsconfigPath, Buffer.from(JSON.stringify(result.tsconfig, null, 2))),
+			SAFE_REPLACE.writeFileAsync(result.path, Buffer.from(JSON.stringify(result.pkg, null, 2)))
 		]);
 	})
 	.then(()=> console.log(`"tsconfig" init complete.`))
