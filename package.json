@@ -18,6 +18,6 @@
     "fs-extra": "^4.0.3",
     "lodash.merge": "^4.6.0",
     "read-pkg-up": "^3.0.0",
-    "safe-replace": "^1.0.2"
+    "safe-replace": "git+ssh://git@github.com/raptor9g/node-safe-replace.git#v1.0.3"
   }
 }
