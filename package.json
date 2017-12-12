@@ -1,6 +1,6 @@
 {
   "name": "ts-config",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "tsconfig.json file for Typescript development.",
   "main": "index.js",
   "scripts": {
@@ -16,10 +16,10 @@
   "license": "ISC",
   "dependencies": {
     "fs-extra": "^4.0.3",
-    "lodash.merge": "^4.6.0",
+    "lodash.mergewith": "^4.6.0",
     "read-pkg-up": "^3.0.0"
   },
   "peerDependencies": {
-    "typescript": "2.x"
+    "typescript": "2.X.X"
   }
 }

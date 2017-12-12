@@ -1,10 +1,22 @@
 const READ_PKG_UP = require('read-pkg-up');
 const PATH = require('path');
 const FS = require('fs-extra');
-const MERGE = require('lodash.merge');
+const MERGE_WITH = require('lodash.mergewith');
 
 const SEP = PATH.sep;
 const TS_CONIFG_FILE_NAME = 'tsconfig.json';
+
+function mergeCustomizer(objValue, srcValue, key, object, source){
+	if(objValue instanceof Array && srcValue instanceof Array){
+		let arr = [];
+		for(let val of srcValue){
+			if(objValue.indexOf(val) === -1){
+				objValue.push(val);
+			};
+		};
+		return objValue;
+	};
+};
 
 //Get package.json and tsconfig.json
 (new Promise((resolve)=>setTimeout(resolve,1000)))
@@ -17,11 +29,11 @@ const TS_CONIFG_FILE_NAME = 'tsconfig.json';
 		result.tsconfigPath = PATH.normalize(`${PATH.parse(result.path).dir}${SEP}${TS_CONIFG_FILE_NAME}`);
 
 		//Add typescript build command to package npm scripts
-		MERGE(result.pkg, {
+		MERGE_WITH(result.pkg, {
 			scripts: {
 				"ts-build": "tsc",
 			}
-		});
+		}, mergeCustomizer);
 
 		//Merge current tsconfig with new tsconfig
 		//Ensure tsconfig path
@@ -29,7 +41,7 @@ const TS_CONIFG_FILE_NAME = 'tsconfig.json';
 		//Does NOT overwrite current tsconfig
 		return FS.pathExists(result.tsconfigPath)
 			.then((exsists)=> exsists ? FS.readJson(result.tsconfigPath) : null)
-			.then((curTsconfig)=> curTsconfig === null ? FS.ensureFile(result.tsconfigPath) : MERGE(result.tsconfig, curTsconfig))
+			.then((curTsconfig)=> curTsconfig === null ? FS.ensureFile(result.tsconfigPath) : MERGE_WITH(result.tsconfig, curTsconfig, mergeCustomizer))
 			.then(()=>{
 
 				let tsconfigParse = PATH.parse(result.tsconfigPath);
@@ -39,8 +51,8 @@ const TS_CONIFG_FILE_NAME = 'tsconfig.json';
 				packageParse.base = `.${packageParse.base}.BAK`;
 
 				return Promise.all([
-					FS.move(result.tsconfigPath, PATH.format(tsconfigParse),{ overwrite: true }),
-					FS.move(result.path, PATH.format(packageParse),{ overwrite: true })
+					FS.copy(result.tsconfigPath, PATH.format(tsconfigParse),{ overwrite: true }),
+					FS.copy(result.path, PATH.format(packageParse),{ overwrite: true })
 				])
 			})
 			.then(()=>result);
