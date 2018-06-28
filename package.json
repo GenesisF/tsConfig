@@ -1,9 +1,10 @@
 {
   "name": "ts-config",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "tsconfig.json file for Typescript development.",
   "main": "index.js",
   "scripts": {
+    "ts-build": "tsc",
     "postinstall": "node index.js"
   },
   "keywords": [
@@ -15,11 +16,13 @@
   "author": "Michael Price",
   "license": "ISC",
   "dependencies": {
-    "fs-extra": "^6.0.1",
-    "lodash.mergewith": "^4.6.1",
-    "read-pkg-up": "^4.0.0"
+    "lodash.mergewith": "^4.6.1"
   },
   "peerDependencies": {
     "typescript": "2.X.X"
+  },
+  "devDependencies": {
+    "@types/node": "^10.5.0",
+    "typescript": "^2.9.2"
   }
 }

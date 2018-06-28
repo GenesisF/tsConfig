@@ -1,6 +1,6 @@
 {
-	"include": [
-        "src/**/*"
+    "include": [
+        "index.ts"
     ],
     "exclude": [
         "node_modules"
@@ -8,16 +8,15 @@
     "compilerOptions":{
         "alwaysStrict":true,
         "allowSyntheticDefaultImports":true,
-        "declaration":true,
-    	"emitDecoratorMetadata":true,
+        "declaration":false,
+        "emitDecoratorMetadata":true,
         "experimentalDecorators":true,
         "inlineSourceMap":true,
         "lib":["ESNext"],
         "listEmittedFiles":true,
         "module": "commonjs",
         "moduleResolution":"Node",
-        "outDir":"build",
         "pretty":true,
-        "target":"ES2016"
+        "target":"ES2015"
     }
 }
