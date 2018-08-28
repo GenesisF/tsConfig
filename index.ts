@@ -24,7 +24,8 @@ const tsConfigTemplateFilePath = path.normalize(`${curDir}${sep}template.${tsCon
 const npmScripts = {
   main:"build/index.js",
   scripts: {
-    "ts-build": "tsc"
+    "ts-build": "tsc",
+    "build-ts": "tsc"
   }
 };
 
