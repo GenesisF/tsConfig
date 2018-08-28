@@ -1,6 +1,6 @@
 {
   "name": "ts-config",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "tsconfig.json file for Typescript development.",
   "main": "index.js",
   "scripts": {
